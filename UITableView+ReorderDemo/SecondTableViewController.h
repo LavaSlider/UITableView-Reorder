@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  SecondTableViewController.h
 //  UITableView+Reorder
 //
 //  Created by David W. Stockton on 3/4/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface SecondTableViewController : UITableViewController
 
 @end

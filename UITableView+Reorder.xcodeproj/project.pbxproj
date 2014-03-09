@@ -10,18 +10,21 @@
 		24794CDC18C5F57E004AEB34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CDB18C5F57E004AEB34 /* Foundation.framework */; };
 		24794CDE18C5F57E004AEB34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CDD18C5F57E004AEB34 /* CoreGraphics.framework */; };
 		24794CE018C5F57E004AEB34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CDF18C5F57E004AEB34 /* UIKit.framework */; };
-		24794CE618C5F57E004AEB34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24794CE418C5F57E004AEB34 /* InfoPlist.strings */; };
 		24794CE818C5F57E004AEB34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794CE718C5F57E004AEB34 /* main.m */; };
 		24794CEC18C5F57E004AEB34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794CEB18C5F57E004AEB34 /* AppDelegate.m */; };
 		24794CEF18C5F57E004AEB34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24794CED18C5F57E004AEB34 /* Main.storyboard */; };
-		24794CF218C5F57E004AEB34 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794CF118C5F57E004AEB34 /* FirstViewController.m */; };
-		24794CF518C5F57E004AEB34 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794CF418C5F57E004AEB34 /* SecondViewController.m */; };
 		24794CF718C5F57E004AEB34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24794CF618C5F57E004AEB34 /* Images.xcassets */; };
 		24794CFE18C5F57E004AEB34 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CFD18C5F57E004AEB34 /* XCTest.framework */; };
 		24794CFF18C5F57E004AEB34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CDB18C5F57E004AEB34 /* Foundation.framework */; };
 		24794D0018C5F57E004AEB34 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24794CDF18C5F57E004AEB34 /* UIKit.framework */; };
 		24794D0818C5F57E004AEB34 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24794D0618C5F57E004AEB34 /* InfoPlist.strings */; };
 		24794D0A18C5F57E004AEB34 /* UITableView_ReorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794D0918C5F57E004AEB34 /* UITableView_ReorderTests.m */; };
+		24794D1918C5FAAE004AEB34 /* UITableView+Reorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794D1818C5FAAE004AEB34 /* UITableView+Reorder.m */; };
+		24794D1A18C5FAAE004AEB34 /* UITableView+Reorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794D1818C5FAAE004AEB34 /* UITableView+Reorder.m */; };
+		24794D1D18C5FC49004AEB34 /* FirstTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24794D1C18C5FC49004AEB34 /* FirstTableViewController.m */; };
+		247CD28518C81ABC00CED30D /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247CD28418C81ABC00CED30D /* SettingsTableViewController.m */; };
+		247CD28818C82F3200CED30D /* SettingsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 247CD28718C82F3200CED30D /* SettingsObject.m */; };
+		2488A7B018C6DAB700497C64 /* SecondTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2488A7AF18C6DAB700497C64 /* SecondTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,27 +38,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		241938C118CC200A00A1BD3F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2478438518C8C4D90097A123 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		24794CD818C5F57E004AEB34 /* UITableView+Reorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UITableView+Reorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24794CDB18C5F57E004AEB34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		24794CDD18C5F57E004AEB34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		24794CDF18C5F57E004AEB34 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		24794CE318C5F57E004AEB34 /* UITableView+Reorder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UITableView+Reorder-Info.plist"; sourceTree = "<group>"; };
-		24794CE518C5F57E004AEB34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		24794CE718C5F57E004AEB34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		24794CE918C5F57E004AEB34 /* UITableView+Reorder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+Reorder-Prefix.pch"; sourceTree = "<group>"; };
-		24794CEA18C5F57E004AEB34 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		24794CEB18C5F57E004AEB34 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		24794CEE18C5F57E004AEB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		24794CF018C5F57E004AEB34 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		24794CF118C5F57E004AEB34 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		24794CF318C5F57E004AEB34 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		24794CF418C5F57E004AEB34 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		24794CF618C5F57E004AEB34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		24794CE318C5F57E004AEB34 /* UITableView+Reorder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "UITableView+Reorder-Info.plist"; path = "../UITableView+ReorderDemo/UITableView+Reorder-Info.plist"; sourceTree = "<group>"; };
+		24794CE718C5F57E004AEB34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "../UITableView+ReorderDemo/main.m"; sourceTree = "<group>"; };
+		24794CE918C5F57E004AEB34 /* UITableView+Reorder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITableView+Reorder-Prefix.pch"; path = "../UITableView+ReorderDemo/UITableView+Reorder-Prefix.pch"; sourceTree = "<group>"; };
+		24794CEA18C5F57E004AEB34 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "../UITableView+ReorderDemo/AppDelegate.h"; sourceTree = "<group>"; };
+		24794CEB18C5F57E004AEB34 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "../UITableView+ReorderDemo/AppDelegate.m"; sourceTree = "<group>"; };
+		24794CF618C5F57E004AEB34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "../UITableView+ReorderDemo/Images.xcassets"; sourceTree = "<group>"; };
 		24794CFC18C5F57E004AEB34 /* UITableView+ReorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UITableView+ReorderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24794CFD18C5F57E004AEB34 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24794D0518C5F57E004AEB34 /* UITableView+ReorderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UITableView+ReorderTests-Info.plist"; sourceTree = "<group>"; };
 		24794D0718C5F57E004AEB34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		24794D0918C5F57E004AEB34 /* UITableView_ReorderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITableView_ReorderTests.m; sourceTree = "<group>"; };
+		24794D1718C5FAAE004AEB34 /* UITableView+Reorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Reorder.h"; sourceTree = "<group>"; };
+		24794D1818C5FAAE004AEB34 /* UITableView+Reorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Reorder.m"; sourceTree = "<group>"; };
+		24794D1B18C5FC49004AEB34 /* FirstTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstTableViewController.h; path = "../UITableView+ReorderDemo/FirstTableViewController.h"; sourceTree = "<group>"; };
+		24794D1C18C5FC49004AEB34 /* FirstTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstTableViewController.m; path = "../UITableView+ReorderDemo/FirstTableViewController.m"; sourceTree = "<group>"; };
+		247CD28318C81ABC00CED30D /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = "../UITableView+ReorderDemo/SettingsTableViewController.h"; sourceTree = "<group>"; };
+		247CD28418C81ABC00CED30D /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = "../UITableView+ReorderDemo/SettingsTableViewController.m"; sourceTree = "<group>"; };
+		247CD28618C82F3200CED30D /* SettingsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsObject.h; path = "../UITableView+ReorderDemo/SettingsObject.h"; sourceTree = "<group>"; };
+		247CD28718C82F3200CED30D /* SettingsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsObject.m; path = "../UITableView+ReorderDemo/SettingsObject.m"; sourceTree = "<group>"; };
+		2488A7AE18C6DAB700497C64 /* SecondTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondTableViewController.h; path = "../UITableView+ReorderDemo/SecondTableViewController.h"; sourceTree = "<group>"; };
+		2488A7AF18C6DAB700497C64 /* SecondTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondTableViewController.m; path = "../UITableView+ReorderDemo/SecondTableViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +94,9 @@
 		24794CCF18C5F57E004AEB34 = {
 			isa = PBXGroup;
 			children = (
-				24794CE118C5F57E004AEB34 /* UITableView+Reorder */,
+				2478438518C8C4D90097A123 /* README.md */,
+				24F99A1018CAC8AD00368217 /* UITableView+Reorder */,
+				24794CE118C5F57E004AEB34 /* UITableView+ReorderDemo */,
 				24794D0318C5F57E004AEB34 /* UITableView+ReorderTests */,
 				24794CDA18C5F57E004AEB34 /* Frameworks */,
 				24794CD918C5F57E004AEB34 /* Products */,
@@ -112,19 +123,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		24794CE118C5F57E004AEB34 /* UITableView+Reorder */ = {
+		24794CE118C5F57E004AEB34 /* UITableView+ReorderDemo */ = {
 			isa = PBXGroup;
 			children = (
 				24794CEA18C5F57E004AEB34 /* AppDelegate.h */,
 				24794CEB18C5F57E004AEB34 /* AppDelegate.m */,
 				24794CED18C5F57E004AEB34 /* Main.storyboard */,
-				24794CF018C5F57E004AEB34 /* FirstViewController.h */,
-				24794CF118C5F57E004AEB34 /* FirstViewController.m */,
-				24794CF318C5F57E004AEB34 /* SecondViewController.h */,
-				24794CF418C5F57E004AEB34 /* SecondViewController.m */,
+				247CD28318C81ABC00CED30D /* SettingsTableViewController.h */,
+				247CD28418C81ABC00CED30D /* SettingsTableViewController.m */,
+				247CD28618C82F3200CED30D /* SettingsObject.h */,
+				247CD28718C82F3200CED30D /* SettingsObject.m */,
+				24794D1B18C5FC49004AEB34 /* FirstTableViewController.h */,
+				24794D1C18C5FC49004AEB34 /* FirstTableViewController.m */,
+				2488A7AE18C6DAB700497C64 /* SecondTableViewController.h */,
+				2488A7AF18C6DAB700497C64 /* SecondTableViewController.m */,
 				24794CF618C5F57E004AEB34 /* Images.xcassets */,
 				24794CE218C5F57E004AEB34 /* Supporting Files */,
 			);
+			name = "UITableView+ReorderDemo";
 			path = "UITableView+Reorder";
 			sourceTree = "<group>";
 		};
@@ -132,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				24794CE318C5F57E004AEB34 /* UITableView+Reorder-Info.plist */,
-				24794CE418C5F57E004AEB34 /* InfoPlist.strings */,
 				24794CE718C5F57E004AEB34 /* main.m */,
 				24794CE918C5F57E004AEB34 /* UITableView+Reorder-Prefix.pch */,
 			);
@@ -157,6 +172,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		24F99A1018CAC8AD00368217 /* UITableView+Reorder */ = {
+			isa = PBXGroup;
+			children = (
+				24794D1718C5FAAE004AEB34 /* UITableView+Reorder.h */,
+				24794D1818C5FAAE004AEB34 /* UITableView+Reorder.m */,
+			);
+			path = "UITableView+Reorder";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,6 +188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24794D0D18C5F57E004AEB34 /* Build configuration list for PBXNativeTarget "UITableView+Reorder" */;
 			buildPhases = (
+				24794D1418C5F763004AEB34 /* ShellScript */,
 				24794CD418C5F57E004AEB34 /* Sources */,
 				24794CD518C5F57E004AEB34 /* Frameworks */,
 				24794CD618C5F57E004AEB34 /* Resources */,
@@ -234,7 +259,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				24794CF718C5F57E004AEB34 /* Images.xcassets in Resources */,
-				24794CE618C5F57E004AEB34 /* InfoPlist.strings in Resources */,
 				24794CEF18C5F57E004AEB34 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,15 +273,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		24794D1418C5F763004AEB34 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		24794CD418C5F57E004AEB34 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24794CF518C5F57E004AEB34 /* SecondViewController.m in Sources */,
+				247CD28518C81ABC00CED30D /* SettingsTableViewController.m in Sources */,
 				24794CEC18C5F57E004AEB34 /* AppDelegate.m in Sources */,
-				24794CF218C5F57E004AEB34 /* FirstViewController.m in Sources */,
+				24794D1D18C5FC49004AEB34 /* FirstTableViewController.m in Sources */,
+				24794D1918C5FAAE004AEB34 /* UITableView+Reorder.m in Sources */,
 				24794CE818C5F57E004AEB34 /* main.m in Sources */,
+				2488A7B018C6DAB700497C64 /* SecondTableViewController.m in Sources */,
+				247CD28818C82F3200CED30D /* SettingsObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24794D0A18C5F57E004AEB34 /* UITableView_ReorderTests.m in Sources */,
+				24794D1A18C5FAAE004AEB34 /* UITableView+Reorder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,20 +324,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		24794CE418C5F57E004AEB34 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				24794CE518C5F57E004AEB34 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		24794CED18C5F57E004AEB34 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				24794CEE18C5F57E004AEB34 /* Base */,
+				241938C118CC200A00A1BD3F /* en */,
 			);
 			name = Main.storyboard;
+			path = "../UITableView+ReorderDemo";
 			sourceTree = "<group>";
 		};
 		24794D0618C5F57E004AEB34 /* InfoPlist.strings */ = {
@@ -385,8 +422,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UITableView+Reorder/UITableView+Reorder-Prefix.pch";
-				INFOPLIST_FILE = "UITableView+Reorder/UITableView+Reorder-Info.plist";
+				GCC_PREFIX_HEADER = "UITableView+ReorderDemo/UITableView+Reorder-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/UITableView+ReorderDemo/UITableView+Reorder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -398,8 +436,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UITableView+Reorder/UITableView+Reorder-Prefix.pch";
-				INFOPLIST_FILE = "UITableView+Reorder/UITableView+Reorder-Info.plist";
+				GCC_PREFIX_HEADER = "UITableView+ReorderDemo/UITableView+Reorder-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/UITableView+ReorderDemo/UITableView+Reorder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -416,7 +455,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UITableView+Reorder/UITableView+Reorder-Prefix.pch";
+				GCC_PREFIX_HEADER = "UITableView+ReorderDemo/UITableView+Reorder-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -439,7 +478,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UITableView+Reorder/UITableView+Reorder-Prefix.pch";
+				GCC_PREFIX_HEADER = "UITableView+ReorderDemo/UITableView+Reorder-Prefix.pch";
 				INFOPLIST_FILE = "UITableView+ReorderTests/UITableView+ReorderTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -466,6 +505,7 @@
 				24794D0F18C5F57E004AEB34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		24794D1018C5F57E004AEB34 /* Build configuration list for PBXNativeTarget "UITableView+ReorderTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +514,7 @@
 				24794D1218C5F57E004AEB34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

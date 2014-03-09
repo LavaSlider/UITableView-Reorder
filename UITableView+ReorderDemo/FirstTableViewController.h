@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  FirstTableViewController.h
 //  UITableView+Reorder
 //
 //  Created by David W. Stockton on 3/4/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface FirstTableViewController : UITableViewController
 
 @end
