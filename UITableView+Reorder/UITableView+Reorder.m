@@ -189,7 +189,6 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
         rect.size.height -= self.contentInset.top;
 	
 	// tell us if we should scroll and which direction
-        //CGFloat scrollZoneHeight = rect.size.height / 6;	// Divide the screen into zones
 	CGFloat scrollZoneHeight = 6;
         CGFloat topScrollBeginning = self.contentOffset.y + self.contentInset.top + scrollZoneHeight;
 	// Note that tableView.contentOffset.y + tableView.contentInset.top + rect.size.height seems to be the same as CGRectGetMaxY(tableView.bounds)
@@ -240,7 +239,6 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 	//		See if the top edge is above the center of the cell above
 	//	2. If below:
 	//		See if the bottom edge is below the center of the cell below
-#if 1
 	CGRect whereWeWere = [self rectForRowAtIndexPath: self.toIndexPathForRowBeingMoved];
 	CGRect whereWeAre = self.snapShotOfCellBeingMoved.frame;
 	CGFloat centerX = self.snapShotOfCellBeingMoved.center.x;
@@ -465,224 +463,6 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 			}
 		}
 	}
-#elif 1
-	CGFloat topOfSnapShot = CGRectGetMinY(self.snapShotOfCellBeingMoved.frame);
-	CGFloat topOfToLocation = CGRectGetMinY([self rectForRowAtIndexPath: self.toIndexPathForRowBeingMoved]);
-	CGFloat bottomOfHeader = CGRectGetMaxY([self rectForHeaderInSection: self.toIndexPathForRowBeingMoved.section]);
-	NSLog( @"----------------------------------------" );
-	NSLog( @"- The snap shot cell's top edge is at %g and bottom edge is at %g", topOfSnapShot, CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame) );
-	NSLog( @"- The top of the blank row is at %g and the bottom edge is at %g", topOfToLocation, CGRectGetMaxY([self rectForRowAtIndexPath: self.toIndexPathForRowBeingMoved]) );
-	NSLog( @"- The bottom of the header is at %g", bottomOfHeader );
-	NSIndexPath *rowUnderTopEdge = [self indexPathForRowAtPoint: CGPointMake( self.snapShotOfCellBeingMoved.center.x,  topOfSnapShot)];
-	NSIndexPath *rowUnderBottomEdge = [self indexPathForRowAtPoint: CGPointMake( self.snapShotOfCellBeingMoved.center.x,  CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame))];
-	if( rowUnderTopEdge ) {
-		NSLog( @"- The row at the top edge is %d in section %d", rowUnderTopEdge.row, rowUnderTopEdge.section );
-	} else {
-		NSLog( @"- The row at the top edge is nil" );
-	}
-	if( rowUnderBottomEdge ) {
-		NSLog( @"- The row at the bottom edge is %d in section %d", rowUnderBottomEdge.row, rowUnderBottomEdge.section );
-	} else {
-		NSLog( @"- The row at the bottom edge is nil" );
-	}
-	NSLog( @"----------------------------------------" );
-
-	CGRect whereWeWere = [self rectForRowAtIndexPath: self.toIndexPathForRowBeingMoved];
-	if( CGRectGetMinY(self.snapShotOfCellBeingMoved.frame) < CGRectGetMinY(whereWeWere) ) {
-		// How do I check if the top edge is in a header or footer
-		// between sections? Maybe be getting the edges of the where we
-		// were and the next adjacent cell in this direction and checking
-		// for a gap? What about if there are skipped rows or sections?
-		// This deals with non-contiguity very poorly!
-		if( self.toIndexPathForRowBeingMoved.section > 0 && self.toIndexPathForRowBeingMoved.row == 0 ) {
-			// Could possibly be in a header or footer...
-			CGFloat bottomOfLastRowOfPreviousSection;
-			NSInteger previousSectionRowCount = [self numberOfRowsInSection: self.toIndexPathForRowBeingMoved.section - 1];
-		//	if( previousSectionRowCount > 0 ) {
-		//		CGRect bottomRowRect = [self rectForRowAtIndexPath: [NSIndexPath indexPathForRow: previousSectionRowCount - 1 inSection: self.toIndexPathForRowBeingMoved.section - 1]];
-		//		bottomOfLastRowOfPreviousSection = CGRectGetMaxY( bottomRowRect );
-		//	} else {
-				CGRect footerRect = [self rectForFooterInSection: self.toIndexPathForRowBeingMoved.section - 1];
-				bottomOfLastRowOfPreviousSection = CGRectGetMinY( footerRect );
-		//	}
-			CGFloat gap = CGRectGetMinY(whereWeWere) - bottomOfLastRowOfPreviousSection;
-			NSLog( @"The gap between the last row of the previous section and the top row of the current section is %g", gap );
-			// What if the user has moved beyond the gap into the next row or two sections back...?
-			if( gap > 0.0 && CGRectGetMinY(self.snapShotOfCellBeingMoved.frame) <= CGRectGetMinY(whereWeWere) - (gap / 2.0)) {
-				NSIndexPath *indexPathOfLocation = [NSIndexPath indexPathForRow: previousSectionRowCount inSection: self.toIndexPathForRowBeingMoved.section - 1];
-				// Adjust the destination based on the delegate method
-				if( [self.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
-					indexPathOfLocation = [self.delegate tableView: self targetIndexPathForMoveFromRowAtIndexPath: self.fromIndexPathOfRowBeingMoved toProposedIndexPath: indexPathOfLocation];
-				}
-				
-				// See if the destination row is different from the source
-				if( [self.toIndexPathForRowBeingMoved compare: indexPathOfLocation] != NSOrderedSame ) {
-					[self movePlaceHolderRowFromIndexPath: self.toIndexPathForRowBeingMoved toIndexPath: indexPathOfLocation];
-				}
-			}
-		}
-		NSIndexPath *indexPathOfLocation = [self indexPathForRowAtPoint: CGPointMake(CGRectGetMidX(self.snapShotOfCellBeingMoved.frame), CGRectGetMinY(self.snapShotOfCellBeingMoved.frame))];
-		if( indexPathOfLocation ) {
-			// Adjust the destination based on the delegate method
-			if( [self.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
-				indexPathOfLocation = [self.delegate tableView: self targetIndexPathForMoveFromRowAtIndexPath: self.fromIndexPathOfRowBeingMoved toProposedIndexPath: indexPathOfLocation];
-			}
-			
-			// See if the destination row is different from the source
-			if( [self.toIndexPathForRowBeingMoved compare: indexPathOfLocation] != NSOrderedSame ) {
-				CGRect whereWeMightGo = [self rectForRowAtIndexPath: indexPathOfLocation];
-				if( CGRectGetMinY(self.snapShotOfCellBeingMoved.frame) <= CGRectGetMidY(whereWeMightGo) ) {
-					[self movePlaceHolderRowFromIndexPath: self.toIndexPathForRowBeingMoved toIndexPath: indexPathOfLocation];
-				}
-			}
-		}
-	} else if( CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame) > CGRectGetMaxY(whereWeWere) ) {
-		// How do I check if the bottom edge is in a footer or header
-		// between sections? Maybe be getting the edges of the where we
-		// were and the next adjacent cell in this direction and checking
-		// for a gap?
-		NSInteger sectionCount = self.numberOfSections;
-		NSInteger rowsInSection = [self numberOfRowsInSection: self.toIndexPathForRowBeingMoved.section];
-		if( self.toIndexPathForRowBeingMoved.section < sectionCount - 1 && self.toIndexPathForRowBeingMoved.row == rowsInSection - 1 ) {
-			// Could possibly be in a header or footer...
-			CGFloat topOfFirstRowOfNextSection;
-			if( [self numberOfRowsInSection: self.toIndexPathForRowBeingMoved.section + 1] > 0 ) {
-				CGRect topRowRect = [self rectForRowAtIndexPath: [NSIndexPath indexPathForRow: 0 inSection: self.toIndexPathForRowBeingMoved.section + 1]];
-				topOfFirstRowOfNextSection = CGRectGetMinY( topRowRect );
-			} else {
-				CGRect headerRect = [self rectForHeaderInSection: self.toIndexPathForRowBeingMoved.section + 1];
-				topOfFirstRowOfNextSection = CGRectGetMaxY( headerRect );
-			}
-			CGFloat gap = topOfFirstRowOfNextSection - CGRectGetMaxY( whereWeWere );
-			NSLog( @"The gap between the last row of the current section and the first row of the next section is %g", gap );
-			// What if the user has moved beyond the gap into the next row or the two sections back...?
-			if( gap > 0.0 && CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame) >= CGRectGetMaxY(whereWeWere) + (gap / 2.0)) {
-				NSIndexPath *indexPathOfLocation = [NSIndexPath indexPathForRow: 0 inSection: self.toIndexPathForRowBeingMoved.section + 1];
-				// Adjust the destination based on the delegate method
-				if( [self.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
-					indexPathOfLocation = [self.delegate tableView: self targetIndexPathForMoveFromRowAtIndexPath: self.fromIndexPathOfRowBeingMoved toProposedIndexPath: indexPathOfLocation];
-				}
-				
-				// See if the destination row is different from the source
-				if( [self.toIndexPathForRowBeingMoved compare: indexPathOfLocation] != NSOrderedSame ) {
-					[self movePlaceHolderRowFromIndexPath: self.toIndexPathForRowBeingMoved toIndexPath: indexPathOfLocation];
-				}
-			}
-		}
-		NSIndexPath *indexPathOfLocation = [self indexPathForRowAtPoint: CGPointMake(CGRectGetMidX(self.snapShotOfCellBeingMoved.frame), CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame))];
-		if( indexPathOfLocation ) {
-			// Adjust the destination based on the delegate method
-			if( [self.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
-				indexPathOfLocation = [self.delegate tableView: self targetIndexPathForMoveFromRowAtIndexPath: self.fromIndexPathOfRowBeingMoved toProposedIndexPath: indexPathOfLocation];
-			}
-			
-			// See if the destination row is different from the source
-			if( [self.toIndexPathForRowBeingMoved compare: indexPathOfLocation] != NSOrderedSame ) {
-				CGRect whereWeMightGo = [self rectForRowAtIndexPath: indexPathOfLocation];
-				if( CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame) >= CGRectGetMidY(whereWeMightGo) ) {
-					[self movePlaceHolderRowFromIndexPath: self.toIndexPathForRowBeingMoved toIndexPath: indexPathOfLocation];
-				}
-			}
-		}
-	}
-#else
-	//NSIndexPath *indexPathOfLocation = [tableView indexPathForRowAtPoint: point];
-	NSIndexPath *indexPathOfLocation = [tableView indexPathForRowAtPoint: self.snapShotOfCellBeingMoved.center];
-	
-	// For better between segment function I should test if the top (or
-	// bottom if moving down) of the snapShot reaches the center of the
-	// combined section header and footer heights (or maybe the average
-	// of the bottom of the last row of the section above and the first
-	// row of the section below). I would want to test this
-	
-	// If the touch point is on a header or footer it might return nil
-	if( indexPathOfLocation ) {
-		// Adjust the destination based on the delegate method
-		if( [tableView.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
-			indexPathOfLocation = [tableView.delegate tableView: tableView targetIndexPathForMoveFromRowAtIndexPath: self.fromIndexPathOfRowBeingMoved toProposedIndexPath: indexPathOfLocation];
-		}
-		
-		// See if the destination row is different from the source
-		if( [self.toIndexPathForRowBeingMoved compare: indexPathOfLocation] != NSOrderedSame ) {
-			UITableViewCell *cellAtLocation = [tableView cellForRowAtIndexPath: indexPathOfLocation];
-			NSLog( @"The moving row is over row %d in section %d and the current moveTo row is %d in section %d", indexPathOfLocation.row, indexPathOfLocation.section, self.toIndexPathForRowBeingMoved.row, self.toIndexPathForRowBeingMoved.section );
-			NSLog( @"- It is%s below and the snapShot center is at %g over a row with center %g", [self rowAtIndexPath: self.toIndexPathForRowBeingMoved isBelowRowAtIndexPath: indexPathOfLocation] ? "" : " not", self.snapShotOfCellBeingMoved.center.y, cellAtLocation.center.y );
-			NSLog( @"- It is%s above and the snapShot center is at %g over a row with center %g", [self rowAtIndexPath: self.toIndexPathForRowBeingMoved isAboveRowAtIndexPath: indexPathOfLocation] ? "" : " not", self.snapShotOfCellBeingMoved.center.y, cellAtLocation.center.y );
-			if( (self.toIndexPathForRowBeingMoved.section > indexPathOfLocation.section &&
-			     self.snapShotOfCellBeingMoved.center.y > cellAtLocation.center.y) ) {
-				NSIndexPath *insertLocation = [NSIndexPath indexPathForRow: indexPathOfLocation.row + 1 inSection: indexPathOfLocation.section];
-				NSLog( @"Will move to row %d in section %d", indexPathOfLocation.row, indexPathOfLocation.section );
-				[tableView beginUpdates];
-				[tableView deleteRowsAtIndexPaths: @[self.toIndexPathForRowBeingMoved] withRowAnimation: UITableViewRowAnimationRight];
-				[tableView insertRowsAtIndexPaths: @[insertLocation] withRowAnimation: UITableViewRowAnimationLeft];
-				self.toIndexPathForRowBeingMoved = insertLocation;
-				[tableView endUpdates];
-			} else if( (self.toIndexPathForRowBeingMoved.section < indexPathOfLocation.section &&
-				    self.snapShotOfCellBeingMoved.center.y < cellAtLocation.center.y ) ) {
-				NSLog( @"Will move to row %d in section %d", indexPathOfLocation.row, indexPathOfLocation.section );
-				[tableView beginUpdates];
-				[tableView deleteRowsAtIndexPaths: @[self.toIndexPathForRowBeingMoved] withRowAnimation: UITableViewRowAnimationRight];
-				[tableView insertRowsAtIndexPaths: @[indexPathOfLocation] withRowAnimation: UITableViewRowAnimationLeft];
-				self.toIndexPathForRowBeingMoved = indexPathOfLocation;
-				[tableView endUpdates];
-			} else if(
-#if 1
-				  // When top reaches center
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isBelowRowAtIndexPath: indexPathOfLocation] &&
-				   CGRectGetMinY(self.snapShotOfCellBeingMoved.frame) <= cellAtLocation.center.y) ||
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isAboveRowAtIndexPath: indexPathOfLocation] &&
-				   CGRectGetMaxY(self.snapShotOfCellBeingMoved.frame) >= cellAtLocation.center.y)
-#elif 0
-				  // When center reaches bottom (jitters when little row moved over tall row)
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isBelowRowAtIndexPath: indexPathOfLocation] &&
-				   self.snapShotOfCellBeingMoved.center.y < CGRectGetMaxY(cellAtLocation.frame)) ||
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isAboveRowAtIndexPath: indexPathOfLocation] &&
-				   self.snapShotOfCellBeingMoved.center.y > CGRectGetMinY(cellAtLocation.frame))
-#else
-				  // When center reaches center (does not look good, too much overlap)
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isBelowRowAtIndexPath: indexPathOfLocation] &&
-				   self.snapShotOfCellBeingMoved.center.y < cellAtLocation.center.y) ||
-				  ([self rowAtIndexPath: self.toIndexPathForRowBeingMoved isAboveRowAtIndexPath: indexPathOfLocation] &&
-				   self.snapShotOfCellBeingMoved.center.y > cellAtLocation.center.y)
-#endif
-				  ) {
-				NSLog( @"Will move to row %d in section %d", indexPathOfLocation.row, indexPathOfLocation.section );
-#if 0
-				// Use move instead of delete and insert
-				// (Looks pretty bad, continue to use delete and insert)
-				[tableView beginUpdates];
-				[tableView moveRowAtIndexPath: self.toIndexPathForRowBeingMoved toIndexPath: indexPathOfLocation];
-				self.toIndexPathForRowBeingMoved = indexPathOfLocation;
-				[tableView endUpdates];
-#else
-				UITableViewRowAnimation delAnimation;
-				UITableViewRowAnimation insAnimation;
-				if( [self rowAtIndexPath: indexPathOfLocation isAboveRowAtIndexPath: self.toIndexPathForRowBeingMoved] ) {
-					NSLog( @"---- moving up animations." );
-					delAnimation = UITableViewRowAnimationFade;
-					insAnimation = UITableViewRowAnimationNone;
-				} else {
-					NSLog( @"---- moving down animations." );
-					delAnimation = UITableViewRowAnimationFade;
-					insAnimation = UITableViewRowAnimationNone;
-				}
-				[tableView beginUpdates];
-				[tableView deleteRowsAtIndexPaths: @[self.toIndexPathForRowBeingMoved] withRowAnimation: delAnimation];
-				[tableView insertRowsAtIndexPaths: @[indexPathOfLocation] withRowAnimation: insAnimation];
-				self.toIndexPathForRowBeingMoved = indexPathOfLocation;
-				[tableView endUpdates];
-#endif
-				//for( NSInteger section = 0; section < tableView.numberOfSections; ++section ) {
-				//	NSInteger rowCount = [self tableView: tableView moveAdjustedRowCount: [tableView numberOfRowsInSection: section] forSection: section];
-				//	for( NSInteger row = 0; row < rowCount; ++row ) {
-				//		NSIndexPath *dSource = [self tableView: tableView dataSourceIndexPathFromVisibleIndexPath: [NSIndexPath indexPathForRow: row inSection: section]];
-				//		NSLog( @"Screen row %d in section %d gets data source row %d from section %d", row, section, dSource.row, dSource.section );
-				//	}
-				//}
-			}
-		}
-	}
-#endif
 }
 - (void) movePlaceHolderRowFromIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath {
 	if( fromIndexPath.length < 2 || toIndexPath.length < 2 ) {
@@ -697,17 +477,17 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 	self.toIndexPathForRowBeingMoved = toIndexPath;
 	[self endUpdates];
 #else
-	UITableViewRowAnimation delAnimation;
-	UITableViewRowAnimation insAnimation;
-	if( [toIndexPath isAboveRowAtIndexPath: fromIndexPath] ) {
-		NSLog( @"---- moving up animations." );
-		delAnimation = UITableViewRowAnimationFade;
-		insAnimation = UITableViewRowAnimationNone;
-	} else {
-		NSLog( @"---- moving down animations." );
-		delAnimation = UITableViewRowAnimationFade;
-		insAnimation = UITableViewRowAnimationNone;
-	}
+	UITableViewRowAnimation delAnimation = UITableViewRowAnimationAutomatic;
+	UITableViewRowAnimation insAnimation = UITableViewRowAnimationAutomatic;
+	//if( [toIndexPath isAboveRowAtIndexPath: fromIndexPath] ) {
+	//	NSLog( @"---- moving up animations." );
+	//	delAnimation = UITableViewRowAnimationFade;
+	//	insAnimation = UITableViewRowAnimationNone;
+	//} else {
+	//	NSLog( @"---- moving down animations." );
+	//	delAnimation = UITableViewRowAnimationFade;
+	//	insAnimation = UITableViewRowAnimationNone;
+	//}
 	if( [self.delegate respondsToSelector: @selector(tableView:willMovePlaceHolderFromIndexPath:toIndexPath:)] ) {
 		[(id) self.delegate tableView: self willMovePlaceHolderFromIndexPath: fromIndexPath toIndexPath: toIndexPath];
 	}
