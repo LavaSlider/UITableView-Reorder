@@ -1,6 +1,6 @@
 # UITableView+Reorder
 
-This provides easy row reordering with a long press gesture for any UITableView without entering edit mode. It is very easy to use since everything is encapsulated in a category (like [Wenting](https://github.com/wentingliu) Liu did). The difference between this implementation and his is that no modifications are made to the data source until the use stops dragging the row. This is how the built-in reorder functionality works, in fact, an effort was made to make this category work as closely as possible to the built-in functionality.
+This provides easy row reordering with a long press gesture for any UITableView without entering edit mode. It is very easy to use since everything is encapsulated in a category (like [Wenting Liu](https://github.com/wentingliu) did). The difference between this implementation and his is that no modifications are made to the data source until the use stops dragging the row. This is how the built-in reorder functionality works, in fact, an effort was made to make this category work as closely as possible to the built-in functionality.
 
 This did introduce a little additional complexity in its use. This complexity is in three areas:
 
