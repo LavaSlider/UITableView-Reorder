@@ -65,6 +65,8 @@
 		247CD28718C82F3200CED30D /* SettingsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsObject.m; path = "../UITableView+ReorderDemo/SettingsObject.m"; sourceTree = "<group>"; };
 		2488A7AE18C6DAB700497C64 /* SecondTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondTableViewController.h; path = "../UITableView+ReorderDemo/SecondTableViewController.h"; sourceTree = "<group>"; };
 		2488A7AF18C6DAB700497C64 /* SecondTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondTableViewController.m; path = "../UITableView+ReorderDemo/SecondTableViewController.m"; sourceTree = "<group>"; };
+		24BBF12618CE24A200710F3D /* UITableView+Reorder.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UITableView+Reorder.podspec"; sourceTree = "<group>"; };
+		24BBF12818CE2D8F00710F3D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				2478438518C8C4D90097A123 /* README.md */,
+				24BBF12618CE24A200710F3D /* UITableView+Reorder.podspec */,
+				24BBF12818CE2D8F00710F3D /* .gitignore */,
 				24F99A1018CAC8AD00368217 /* UITableView+Reorder */,
 				24794CE118C5F57E004AEB34 /* UITableView+ReorderDemo */,
 				24794D0318C5F57E004AEB34 /* UITableView+ReorderTests */,

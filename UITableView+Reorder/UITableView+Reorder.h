@@ -1,9 +1,8 @@
 //
 //  UITableView+Reorder.h
 //
-//
 //  Created by David W. Stockton on 3/3/14.
-//  Copyright (c) 2014 Syntonicity, LLC. All rights reserved.
+//  Copyright (c) 2014 Syntonicity, LLC.
 //
 
 #import <UIKit/UIKit.h>
@@ -25,7 +24,7 @@
 // Use this method to translate the index path during an active move
 - (NSIndexPath *) dataSourceIndexPathFromVisibleIndexPath: (NSIndexPath *) indexPath;
 
-// Use this method to determine whether the empty place-holder cell should be returned.
+// Use this method to determine whether the 'empty' place-holder cell should be returned.
 - (BOOL) shouldSubstitutePlaceHolderForCellBeingMovedAtIndexPath: (NSIndexPath *) indexPath;
 
 // If you want to connect your own gesture recognizer
@@ -38,6 +37,9 @@
 
 @protocol UITableViewDataSourceReorderExtension <NSObject>
 @optional
+// This method, if added to the tableView data source object, can return a
+// view that is dragged up and down the screen for reordering. Note: This view
+// must have the same height as the cell that is being moved.
 - (UIView *) tableView: (UITableView *) tableView snapShotViewOfCellAtIndexPath: (NSIndexPath *) indexPath;
 @end
 

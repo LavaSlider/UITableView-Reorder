@@ -34,12 +34,14 @@
 }
 
 - (void) viewWillAppear: (BOOL) animated {
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #ifdef ENABLE_LONG_PRESS_MOVE
 	SettingsObject *mso = [SettingsObject masterSettingsObject];
 	self.tableView.allowsLongPressToReorder = mso.allowsLongPressToReorder;
 	self.tableView.allowsLongPressToReorderDuringEditing = mso.allowsLongPressToReorderDuringEditing;
-	[self.tableView reloadData];
 #endif
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+	[self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -51,26 +53,33 @@
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
 	NSInteger rowCount = [self.tableData[section] count];
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #ifdef ENABLE_LONG_PRESS_MOVE
 	rowCount = [tableView adjustedValueForReorderingOfRowCount: rowCount forSection: section];
 #endif
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	return rowCount;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) tableView cellForRowAtIndexPath: (NSIndexPath *) indexPath {
 	static NSString *CellIdentifier = @"Cell";
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #ifdef ENABLE_LONG_PRESS_MOVE
 	indexPath = [tableView dataSourceIndexPathFromVisibleIndexPath: indexPath];
 #endif
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
 	
 	// Configure the cell...
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #ifdef ENABLE_LONG_PRESS_MOVE
 	if( [tableView shouldSubstitutePlaceHolderForCellBeingMovedAtIndexPath: indexPath] ) {
-		cell.textLabel.text = @"";
+		//cell.textLabel.text = @"";
+		cell.hidden = YES;
 		return cell;
 	}
 #endif
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	cell.textLabel.text = [NSString stringWithFormat: @"Data element %@ (Section %d, row %d)", self.tableData[indexPath.section][indexPath.row], indexPath.section, indexPath.row];
 	return cell;
 }
