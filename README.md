@@ -1,6 +1,6 @@
 # UITableView+Reorder
 
-This provides easy row reordering with a long press gesture for any UITableView without entering edit mode. It is very easy to use since everything is encapsulated in a category (like Wenting Liu did). The difference between this implementation and his is that no modifications are made to the data source until the use stops dragging the row. This is how the built-in reorder functionality works, in fact, an effort was made to make this category work as closely as possible to the built-in functionality.
+This provides easy row reordering with a long press gesture for any UITableView without entering edit mode. It is very easy to use since everything is encapsulated in a category (like [Wenting](https://github.com/wentingliu) Liu did). The difference between this implementation and his is that no modifications are made to the data source until the use stops dragging the row. This is how the built-in reorder functionality works, in fact, an effort was made to make this category work as closely as possible to the built-in functionality.
 
 This did introduce a little additional complexity in its use. This complexity is in three areas:
 
@@ -8,7 +8,7 @@ This did introduce a little additional complexity in its use. This complexity is
 2. While a row is being dragged up or down the table there is a disconnect between where the data for that row exists in the data source and where that row is on the screen. In order to deal with this another helper method is provided that translates the index path for the visilbe location on the screen to the index path in the data source: `- (NSIndexPath *) dataSourceIndexPathFromVisibleIndexPath: (NSIndexPath *) indexPath`. This should be used in all tableview delegate or datasource methods that have an `NSIndexPath` argument that is used to get data from the data source.
 3. There is an empty place left in the tableview for the row that is being dragged. It is the responsibility of the tableview's data source to provide this cell instead of the normal cell. A helper method is provided so `- (UITableViewCell *) tableView: (UITableView *) tableView cellForRowAtIndexPath: (NSIndexPath *) indexPath` knows whether to return the real cell or the place holder called `- (BOOL) shouldSubstitutePlaceHolderForCellBeingMovedAtIndexPath: (NSIndexPath *) indexPath`.
 
-Everything else that is done is identical to the configuration needed for having row reordering throught the built-in methodology. This includes:
+Everything else that is done is identical to the configuration needed for having row reordering through the built-in methodology. This includes:
 
 1. Implement:
 
@@ -33,19 +33,19 @@ is implemented then it must return **YES** for any rows that you want to be able
 is implemented then it must return **YES** for any rows that you want to be able to move.
 
 
-Implementations of this functionality as a subclass (like Ben Vogelzang, Florian Mielke and Daniel Shusta did) prevent it from being used on UITableViews that are already built into other classes.
+
+Implementations of this functionality as a subclass (like [Ben Vogelzang](https://github.com/bvogelzang), [Florian Mielke](https://github.com/FlorianMielke) and [Daniel Shusta](https://github.com/shusta) did) prevent it from being used on UITableViews that are already built into other classes.
 
 ## Example usage:
 
 ````
 #import "UITableView+Reorder.h"
-
 self.tableView.allowsLongPressToReorder = YES;
 ````
 
 That is all it takes to enable it. There is also `self.tableView.allowsLongPressToReorderDuringEditing` in case you want to enable reordering while in edit mode without using the reordering handles provided by iOS.
 
-Or, with more details in context....
+Or a real example with the details and in context....
 
 ````
 @implementation myTableViewControllerSubclass
@@ -55,19 +55,22 @@ Or, with more details in context....
 }
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section {
-	NSInteger rowCount = [self.tableData[section] count];
-	rowCount = [tableView adjustedValueForReorderingOfRowCount: rowCount forSection: section];
-	return rowCount;
+    NSInteger rowCount = [self.tableData[section] count];
+    // -=-=-=- **The row below is added for this category to work** -=-=-=-
+    rowCount = [tableView adjustedValueForReorderingOfRowCount: rowCount forSection: section];
+    return rowCount;
 }
 
 - (UITableViewCell *) tableView: (UITableView *) tableView cellForRowAtIndexPath: (NSIndexPath *) indexPath {
     static NSString *CellIdentifier = @"Cell";
+    // -=-=-=- **The row below is added for this category to work** -=-=-=-
     indexPath = [tableView dataSourceIndexPathFromVisibleIndexPath: indexPath];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
-
+    
     // Configure the cell...
+    // -=-=-=- **The row below is added for this category to look nice** -=-=-=-
     if( [tableView shouldSubstitutePlaceHolderForCellBeingMovedAtIndexPath: indexPath] ) {
-        cell.textLabel.text = @"";
+        cell.hidden = YES;
     } else {
         cell.textLabel.text = [NSString stringWithFormat: @"Data element %@", self.tableData[indexPath.section][indexPath.row]];
     }
@@ -77,13 +80,29 @@ Or, with more details in context....
 
 ## Details
 
+This category creates a long press gesture recognizer and attaches it to the tableView object when the `allowsLongPressToReorder` property is set true (and/or the `allowsLongPressToReorderDuringEditing` property for the same effects while editing).
+This gesture recognizer makes sure that when a row is long-pressed the
+tableView allows row reordering and the specific row is moveable. If so it
+creates a temporary view that will track the user's finger up and down the
+screen, asks the tableView to reload that cell (so you can provide a place
+holder cell, typically blank or hidden), records the starting location, 
+and destination locations shuffling the cells as it goes.
+When the user lifts his or her finger then the `- (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath` method on the table view's `datasource` is called
+so the data source can be adjusted to match the current screen configuration.
+
 Any of the UITableViewDelegate or UITableVewDataSource methods that could be called while a row is being dragged up or down the screen needs to be modified because there is a separation between what is on the screen and what is in the data source. To do this there is an instance method added to the UITableView class that will convert the row index visible on the screen to the row index in the datasource. This method is:
 
 ````
 - (NSIndexPath *) dataSourceIndexPathFromVisibleIndexPath: (NSIndexPath *) indexPath;
 ````
 
-Any method that is passed an `NSIndexPath` that will be used to access the underlying data model for the table view should be adjusted using this method.
+Any method that is passed an `NSIndexPath` that will be used to access the underlying data model for the table view should be adjusted using this method (specific examples are `tableView:cellForRowAtIndexPath:` and `tableView:heightForRowAtIndexPath:`).
+
+Also because the position of the cells on the screen may differ from what is in the actual data the `tableView:numberOfRowsInSection:` should have the value that it would have returned modified with:
+
+````
+- (NSInteger) adjustedValueForReorderingOfRowCount: (NSInteger) rowCount forSection: (NSInteger) section;
+````
 
 ## Acknowledgements
 
