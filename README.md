@@ -80,14 +80,14 @@ Or a real example with the details and in context....
 
 ## Details
 
-This category creates a long press gesture recognizer and attaches it to the tableView object when the `allowsLongPressToReorder` property is set true (and/or the `allowsLongPressToReorderDuringEditing` property for the same effects while editing).
+This category creates a long press gesture recognizer and attaches it to the tableView object when the `allowsLongPressToReorder` property is set true (and/or the `allowsLongPressToReorderDuringEditing` property is set true for the same effects while editing).
 This gesture recognizer makes sure that when a row is long-pressed the
 tableView allows row reordering and the specific row is moveable. If so it
 creates a temporary view that will track the user's finger up and down the
 screen, asks the tableView to reload that cell (so you can provide a place
 holder cell, typically blank or hidden), records the starting location, 
-and destination locations shuffling the cells as it goes.
-When the user lifts his or her finger then the `- (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath` method on the table view's `datasource` is called
+and destination locations and shuffles the cells on the screen as it goes.
+When the user lifts his or her finger then the standard `- (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath` method on the table view's `datasource` is called
 so the data source can be adjusted to match the current screen configuration.
 
 Any of the UITableViewDelegate or UITableVewDataSource methods that could be called while a row is being dragged up or down the screen needs to be modified because there is a separation between what is on the screen and what is in the data source. To do this there is an instance method added to the UITableView class that will convert the row index visible on the screen to the row index in the datasource. This method is:
@@ -98,7 +98,8 @@ Any of the UITableViewDelegate or UITableVewDataSource methods that could be cal
 
 Any method that is passed an `NSIndexPath` that will be used to access the underlying data model for the table view should be adjusted using this method (specific examples are `tableView:cellForRowAtIndexPath:` and `tableView:heightForRowAtIndexPath:`).
 
-Also because the position of the cells on the screen may differ from what is in the actual data the `tableView:numberOfRowsInSection:` should have the value that it would have returned modified with:
+When the transient destination section is different from the source section the number of rows in these sections will be different on the screen compared to what is in the datasource. That is, the destination section will have one more row and the source section will have one less row.
+To automatically adjust for this the `tableView:numberOfRowsInSection:` should have the value that it would have returned modified with:
 
 ````
 - (NSInteger) adjustedValueForReorderingOfRowCount: (NSInteger) rowCount forSection: (NSInteger) section;
