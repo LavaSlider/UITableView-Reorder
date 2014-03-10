@@ -12,17 +12,23 @@ Everything else that is done is identical to the configuration needed for having
 
 1. Implement:
 
-    - (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath;
+````
+- (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath;
+````
 
 2. Moveable rows must be moveable so if
 
-    - (BOOL) tableView: (UITableView *) tableView canMoveRowAtIndexPath: (NSIndexPath *) indexPath;
+````
+- (BOOL) tableView: (UITableView *) tableView canMoveRowAtIndexPath: (NSIndexPath *) indexPath;
+````
 
 is implemented then it must return **YES** for any rows that you want to be able to move.
 
 3. Moveable rows must be editable so if
 
-    - (BOOL) tableView: (UITableView *) tableView canEditRowAtIndexPath: (NSIndexPath *) indexPath;
+````
+- (BOOL) tableView: (UITableView *) tableView canEditRowAtIndexPath: (NSIndexPath *) indexPath;
+````
 
 is implemented then it must return **YES** for any rows that you want to be able to move.
 
@@ -73,7 +79,9 @@ Or, with more details in context....
 
 Any of the UITableViewDelegate or UITableVewDataSource methods that could be called while a row is being dragged up or down the screen needs to be modified because there is a separation between what is on the screen and what is in the data source. To do this there is an instance method added to the UITableView class that will convert the row index visible on the screen to the row index in the datasource. This method is:
 
-    - (NSIndexPath *) dataSourceIndexPathFromVisibleIndexPath: (NSIndexPath *) indexPath;
+````
+- (NSIndexPath *) dataSourceIndexPathFromVisibleIndexPath: (NSIndexPath *) indexPath;
+````
 
 Any method that is passed an `NSIndexPath` that will be used to access the underlying data model for the table view should be adjusted using this method.
 
@@ -85,3 +93,27 @@ Maybe I just like re-inventing the wheel since there is other code out there to 
 2. https://github.com/FlorianMielke/FMMoveTableView
 3. https://github.com/shusta/ReorderingTableViewController
 4. https://github.com/bvogelzang/BVReorderTableView
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) [2014] [David W. Stockton]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
