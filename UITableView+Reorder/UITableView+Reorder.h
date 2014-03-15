@@ -1,5 +1,6 @@
 //
 //  UITableView+Reorder.h
+//  Version 1.0.3
 //
 //  Created by David W. Stockton on 3/3/14.
 //  Copyright (c) 2014 Syntonicity, LLC.

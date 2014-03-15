@@ -1,5 +1,6 @@
 //
 //  UITableView+Reorder.m
+//  Version 1.0.3
 //
 //  Created by David W. Stockton on 3/3/14.
 //  Copyright (c) 2014 Syntonicity, LLC.
@@ -954,13 +955,19 @@ static void *reorderAutoScrollTimerKey = &reorderAutoScrollTimerKey;
 		}
 		// If there are different heights, try swapping their locations and make sure heights also swap...
 		if( indexPathForH0 && indexPathForH1 && h0 != h1 ) {
-			//NSLog( @"The cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH0.row, indexPathForH0.section, h0, indexPathForH1.row, indexPathForH1.section, h1 );
+			DLog( @"Before the faked move, the cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH0.row, indexPathForH0.section, h0, indexPathForH1.row, indexPathForH1.section, h1 );
 			self.fromIndexPathOfRowBeingMoved = indexPathForH0;
 			self.toIndexPathForRowBeingMoved = indexPathForH1;
-			CGFloat h0X = [self.delegate tableView: self heightForRowAtIndexPath: indexPathForH0];
-			CGFloat h1X = [self.delegate tableView: self heightForRowAtIndexPath: indexPathForH1];
-			//NSLog( @"With row swap the cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH0.row, indexPathForH0.section, h0X, indexPathForH1.row, indexPathForH1.section, h1X );
-			if( h0 != h1X || h1 != h0X ) {
+			NSIndexPath *newIndexPathForH1;
+			if( indexPathForH0.section != indexPathForH1.section ) {
+				newIndexPathForH1 = [NSIndexPath indexPathForRow: indexPathForH1.row + 1 inSection: indexPathForH1.section];
+			} else {
+				newIndexPathForH1 = [NSIndexPath indexPathForRow: indexPathForH1.row - 1 inSection: indexPathForH1.section];
+			}
+			CGFloat h0X = [self.delegate tableView: self heightForRowAtIndexPath: indexPathForH1];
+			CGFloat h1X = [self.delegate tableView: self heightForRowAtIndexPath: newIndexPathForH1];
+			DLog( @"With row swap the cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH1.row, indexPathForH1.section, h0X, newIndexPathForH1.row, newIndexPathForH1.section, h1X );
+			if( h0 != h0X || h1 != h1X ) {
 				NSLog( @" " );
 				NSLog( @"*** Warning: indexPath does not appear to be adjusted in tableView delegate method" );
 				NSLog( @"             'tableView:heightForRowAtIndexPath:'. The index path passed to this" );
@@ -975,6 +982,8 @@ static void *reorderAutoScrollTimerKey = &reorderAutoScrollTimerKey;
 			}
 			self.fromIndexPathOfRowBeingMoved = nil;
 			self.toIndexPathForRowBeingMoved = nil;
+		} else {
+			DLog( @"No cells of different heights found." );
 		}
 	} else {
 		NSLog( @" " );
