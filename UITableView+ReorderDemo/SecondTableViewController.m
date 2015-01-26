@@ -45,6 +45,7 @@
 #endif
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	[self.tableView reloadData];
+    [super viewWillAppear: animated];
 }
 
 #pragma mark - UITableViewDataSource methods
