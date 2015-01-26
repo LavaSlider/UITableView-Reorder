@@ -84,8 +84,8 @@
 	}
 #endif
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-	cell.textLabel.text = [NSString stringWithFormat: @"Data element %@ (Section %d, row %d)",
-			       self.tableData[indexPath.section][indexPath.row], indexPath.section, indexPath.row];
+	cell.textLabel.text = [NSString stringWithFormat: @"Data element %@ (Section %ld, row %ld)",
+			       self.tableData[indexPath.section][indexPath.row], (long) indexPath.section, (long) indexPath.row];
 	return cell;
 }
 
@@ -115,17 +115,17 @@
 
 // Override to support rearranging the table view.
 - (void) tableView: (UITableView *) tableView moveRowAtIndexPath: (NSIndexPath *) fromIndexPath toIndexPath: (NSIndexPath *) toIndexPath {
-	NSLog( @"Request to move %d,%d to %d,%d", fromIndexPath.row, fromIndexPath.section, toIndexPath.row, toIndexPath.section );
+	NSLog( @"Request to move %ld,%ld to %ld,%ld", (long) fromIndexPath.row, (long) fromIndexPath.section, (long) toIndexPath.row, (long) toIndexPath.section );
 	NSLog( @"- Data before move:" );
 	[self.tableData enumerateObjectsUsingBlock: ^( id obj, NSUInteger idx, BOOL *stop ) {
-		NSLog( @"  %2d: %@", idx, [obj componentsJoinedByString: @","] );
+		NSLog( @"  %2lu: %@", (unsigned long) idx, [obj componentsJoinedByString: @","] );
 	}];
 	id buffer = [self.tableData[fromIndexPath.section] objectAtIndex: fromIndexPath.row];
 	[self.tableData[fromIndexPath.section] removeObjectAtIndex: fromIndexPath.row];
 	[self.tableData[toIndexPath.section] insertObject: buffer atIndex: toIndexPath.row];
 	NSLog( @"- Data After move:" );
 	[self.tableData enumerateObjectsUsingBlock: ^( id obj, NSUInteger idx, BOOL *stop ) {
-		NSLog( @"  %2d: %@", idx, [obj componentsJoinedByString: @","] );
+		NSLog( @"  %2lu: %@", (unsigned long) idx, [obj componentsJoinedByString: @","] );
 	}];
 }
 
