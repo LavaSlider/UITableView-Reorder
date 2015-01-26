@@ -246,7 +246,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 		// OK, this says there is a row under the top edge but sometimes
 		// it lies and is really in a gap...
 		if( rowUnderTopEdge ) {
-			DLog( @"++++ The top edge is in row %d of section %d", rowUnderTopEdge.row, rowUnderTopEdge.section );
+			DLog( @"++++ The top edge is in row %ld of section %ld", (long) rowUnderTopEdge.row, (long) rowUnderTopEdge.section );
 			CGRect rectForRowUnderTopEdge = [self rectForRowAtIndexPath: rowUnderTopEdge];
 			DLog( @"     Top edge is at %g, row it is over goes from %g to %g", CGRectGetMinY(whereWeAre), CGRectGetMinY(rectForRowUnderTopEdge), CGRectGetMaxY(rectForRowUnderTopEdge) );
 			if( CGRectGetMinY(whereWeAre) > CGRectGetMaxY(rectForRowUnderTopEdge) ) {
@@ -296,14 +296,14 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 				NSInteger bottomSection = [[visibleRows lastObject] section];
 				NSInteger destinationSection = -1;
 				CGFloat midGap = -1.0;
-				DLog( @"++++ The sections on the screen go from %d to %d", topSection, bottomSection );
+				DLog( @"++++ The sections on the screen go from %ld to %ld", (long) topSection, (long) bottomSection );
 				for( NSInteger section = topSection; section <= bottomSection; ++section ) {
 					CGRect sectionHeaderRect = [self rectForHeaderInSection: section];
 					CGRect sectionFooterRect = [self rectForFooterInSection: section];
-					DLog( @"     Section %d header: %@, footer: %@", section, NSStringFromCGRect(sectionHeaderRect), NSStringFromCGRect(sectionFooterRect) );
+					DLog( @"     Section %ld header: %@, footer: %@", (long) section, NSStringFromCGRect(sectionHeaderRect), NSStringFromCGRect(sectionFooterRect) );
 					if( CGRectGetMinY(whereWeAre)  > CGRectGetMinY(sectionHeaderRect) &&
 					    CGRectGetMinY(whereWeAre) <= CGRectGetMaxY(sectionHeaderRect) ) {
-						DLog( @"     - We are in the header of section %d (%g <- %g -> %g)", section, CGRectGetMinY(sectionHeaderRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionHeaderRect) );
+						DLog( @"     - We are in the header of section %ld (%g <- %g -> %g)", (long) section, CGRectGetMinY(sectionHeaderRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionHeaderRect) );
 						// What if we are at the first section?
 						// -- If it is the header of the first section
 						//    then our target row should be the first row of the first section.
@@ -315,7 +315,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 						break;
 					} else if( CGRectGetMinY(whereWeAre)  > CGRectGetMinY(sectionFooterRect) &&
 						   CGRectGetMinY(whereWeAre) <= CGRectGetMaxY(sectionFooterRect) ) {
-						DLog( @"     - We are in the footer of section %d (%g <- %g -> %g)", section, CGRectGetMinY(sectionFooterRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionFooterRect) );
+						DLog( @"     - We are in the footer of section %ld (%g <- %g -> %g)", (long) section, CGRectGetMinY(sectionFooterRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionFooterRect) );
 						// What if we are at the last section?
 						// -- If it is the footer of the last section
 						//    then our target row should be the last row of the last section.
@@ -331,7 +331,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 					}
 				}
 				if( CGRectGetMinY(whereWeAre) <= midGap && destinationSection >= 0 && destinationSection < [self numberOfSections] ) {
-					DLog( @"---- Do the move to the last row of section %d!", destinationSection );
+					DLog( @"---- Do the move to the last row of section %ld!", (long) destinationSection );
 					NSInteger destinationRow = [self numberOfRowsInSection: destinationSection];
 					rowUnderTopEdge = [NSIndexPath indexPathForRow: destinationRow inSection: destinationSection];
 					// Adjust the destination based on the delegate method
@@ -353,7 +353,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 		// OK, this says there is a row under the bottom edge but sometimes
 		// it lies and is really in a gap...
 		if( rowUnderBottomEdge ) {
-			DLog( @"++++ The bottom edge is in row %d of section %d", rowUnderBottomEdge.row, rowUnderBottomEdge.section );
+			DLog( @"++++ The bottom edge is in row %ld of section %ld", (long) rowUnderBottomEdge.row, (long) rowUnderBottomEdge.section );
 			CGRect rectForRowUnderBottomEdge = [self rectForRowAtIndexPath: rowUnderBottomEdge];
 			DLog( @"     Bottom edge is at %g, row it is over goes from %g to %g", CGRectGetMaxY(whereWeAre), CGRectGetMinY(rectForRowUnderBottomEdge), CGRectGetMaxY(rectForRowUnderBottomEdge) );
 			if( CGRectGetMaxY(whereWeAre) > CGRectGetMaxY(rectForRowUnderBottomEdge) ) {
@@ -404,15 +404,15 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 				NSInteger bottomSection = [[visibleRows lastObject] section];
 				NSInteger destinationSection = -1;
 				CGFloat midGap = -1.0;
-				DLog( @"++++ The sections on the screen go from %d to %d", topSection, bottomSection );
+				DLog( @"++++ The sections on the screen go from %ld to %ld", (long) topSection, (long) bottomSection );
 				for( NSInteger section = topSection; section <= bottomSection; ++section ) {
 					CGRect sectionHeaderRect = [self rectForHeaderInSection: section];
 					CGRect sectionFooterRect = [self rectForFooterInSection: section];
-					DLog( @"     Section %d header: %@, footer: %@", section, NSStringFromCGRect(sectionHeaderRect), NSStringFromCGRect(sectionFooterRect) );
+					DLog( @"     Section %ld header: %@, footer: %@", (long) section, NSStringFromCGRect(sectionHeaderRect), NSStringFromCGRect(sectionFooterRect) );
 					// See if we are in the header of this section...
 					if( CGRectGetMaxY(whereWeAre)  > CGRectGetMinY(sectionHeaderRect) &&
 					    CGRectGetMaxY(whereWeAre) <= CGRectGetMaxY(sectionHeaderRect) ) {
-						DLog( @"     - We are in the header of section %d (%g <- %g -> %g)", section, CGRectGetMinY(sectionHeaderRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionHeaderRect) );
+						DLog( @"     - We are in the header of section %ld (%g <- %g -> %g)", (long) section, CGRectGetMinY(sectionHeaderRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionHeaderRect) );
 						// What if we are at the first section?
 						// -- If it is the header of the first section
 						//    then our target row should be the first row of the first section.
@@ -428,7 +428,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 					// See if we are in the footer of this section...
 					} else if( CGRectGetMaxY(whereWeAre)  > CGRectGetMinY(sectionFooterRect) &&
 						   CGRectGetMaxY(whereWeAre) <= CGRectGetMaxY(sectionFooterRect) ) {
-						DLog( @"     - We are in the footer of section %d (%g <- %g -> %g)", section, CGRectGetMinY(sectionFooterRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionFooterRect) );
+						DLog( @"     - We are in the footer of section %ld (%g <- %g -> %g)", (long) section, CGRectGetMinY(sectionFooterRect), CGRectGetMinY(whereWeAre), CGRectGetMaxY(sectionFooterRect) );
 						// What if we are at the last section?
 						// -- If it is the footer of the last section
 						//    then our target row should be the last row of the last section.
@@ -441,7 +441,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 					}
 				}
 				if( CGRectGetMaxY(whereWeAre) >= midGap && destinationSection >= 0 && destinationSection < [self numberOfSections]) {
-					DLog( @"---- Do the move to the first row of section %d!", destinationSection );
+					DLog( @"---- Do the move to the first row of section %ld!", (long) destinationSection );
 					rowUnderBottomEdge = [NSIndexPath indexPathForRow: 0 inSection: destinationSection];
 					// Adjust the destination based on the delegate method
 					if( [self.delegate respondsToSelector: @selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)] ) {
@@ -564,13 +564,12 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 
 - (UIView *) snapShotViewOfCellAtIndexPath: (NSIndexPath *) indexPath {
 	if( [self.delegate respondsToSelector: @selector(tableView:snapShotViewOfCellAtIndexPath:)] ) {
-		DLog( @"Getting snapshot view of cell at row %d in section %d from table view delegate", indexPath.row, indexPath.section );
+		DLog( @"Getting snapshot view of cell at row %ld in section %ld from table view delegate", (long) indexPath.row, (long) indexPath.section );
 		return [(id) self.delegate tableView: self snapShotViewOfCellAtIndexPath: indexPath];
 	} else {
-		DLog( @"Generating snapshot view of cell at row %d in section %d", indexPath.row, indexPath.section );
+		DLog( @"Generating snapshot view of cell at row %ld in section %ld", (long) indexPath.row, (long) indexPath.section );
 #if 1
 	UITableViewCell *touchedCell = [self cellForRowAtIndexPath: indexPath];
-        DLog( @"Got the touched cell" );
 	touchedCell.highlighted = NO;
 	touchedCell.selected = NO;
 	
@@ -582,9 +581,8 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 	UIView *snapShot;
 	if( floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 &&
        [touchedCell respondsToSelector: @selector(snapshotViewAfterScreenUpdates:)] ) {
-        DLog( @"The touched cell responds to selector(snapshotViewAfterScreenUpdates:)" );
 		snapShot = [touchedCell snapshotViewAfterScreenUpdates: YES];
-        DLog( @"Got the snapshot: %@!", snapShot );
+        // Maybe I should check if the snapShot is nil and fall back to some alternate method?
 		snapShot.frame = touchedCell.frame;
 		snapShot.alpha = 0.70;
 		snapShot.layer.shadowOpacity = 1.0;
@@ -593,7 +591,6 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 		// Looks the same or better without the shadows path
 		//snapShot.layer.shadowPath = [[UIBezierPath bezierPathWithRect:snapShot.layer.bounds] CGPath];
 	} else {
-        DLog( @"The touched cell does not respond to selector(snapshotViewAfterScreenUpdates:)" );
 		// make an image from the pressed tableview cell
 		UIGraphicsBeginImageContextWithOptions( touchedCell.bounds.size, NO, 0 );
 		[touchedCell.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -964,7 +961,7 @@ static void *reorderAutoScrollTimerKey = &reorderAutoScrollTimerKey;
 		}
 		// If there are different heights, try swapping their locations and make sure heights also swap...
 		if( indexPathForH0 && indexPathForH1 && h0 != h1 ) {
-			DLog( @"Before the faked move, the cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH0.row, indexPathForH0.section, h0, indexPathForH1.row, indexPathForH1.section, h1 );
+			DLog( @"Before the faked move, the cell at row %ld in section %ld has a height of %g and row %ld in section %ld has a height of %g", (long) indexPathForH0.row, (long) indexPathForH0.section, h0, (long) indexPathForH1.row, (long) indexPathForH1.section, h1 );
 			self.fromIndexPathOfRowBeingMoved = indexPathForH0;
 			self.toIndexPathForRowBeingMoved = indexPathForH1;
 			NSIndexPath *newIndexPathForH1;
@@ -975,7 +972,7 @@ static void *reorderAutoScrollTimerKey = &reorderAutoScrollTimerKey;
 			}
 			CGFloat h0X = [self.delegate tableView: self heightForRowAtIndexPath: indexPathForH1];
 			CGFloat h1X = [self.delegate tableView: self heightForRowAtIndexPath: newIndexPathForH1];
-			DLog( @"With row swap the cell at row %d in section %d has a height of %g and row %d in section %d has a height of %g", indexPathForH1.row, indexPathForH1.section, h0X, newIndexPathForH1.row, newIndexPathForH1.section, h1X );
+			DLog( @"With row swap the cell at row %ld in section %ld has a height of %g and row %ld in section %ld has a height of %g", (long) indexPathForH1.row, (long) indexPathForH1.section, h0X, (long) newIndexPathForH1.row, (long) newIndexPathForH1.section, h1X );
 			if( h0 != h0X || h1 != h1X ) {
 				NSLog( @" " );
 				NSLog( @"*** Warning: indexPath does not appear to be adjusted in tableView delegate method" );
