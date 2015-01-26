@@ -41,6 +41,7 @@
 
 	self.toEvenSectionsSwitch.on = mso.canOnlyMoveToEvenNumberedSections;
 	self.toEvenRowsSwitch.on = mso.canOnlyMoveToEvenNumberedRows;
+    [super viewWillAppear: animated];
 }
 
 - (IBAction)longPressReorderSwitchChanged:(UISwitch *)sender {

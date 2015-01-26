@@ -570,13 +570,21 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 		DLog( @"Generating snapshot view of cell at row %d in section %d", indexPath.row, indexPath.section );
 #if 1
 	UITableViewCell *touchedCell = [self cellForRowAtIndexPath: indexPath];
+        DLog( @"Got the touched cell" );
 	touchedCell.highlighted = NO;
 	touchedCell.selected = NO;
 	
 	// snapshotViewAfterScreenUpdates: is an iOS 7 introduced method!
+    // In iOS 8 I get the error:
+    //     Snapshotting a view that has not been rendered results in an empty snapshot.
+    //     Ensure your view has been rendered at least once before snapshotting or snapshot after screen updates.
+    // Even though I have "yes" for AfterScreenUpdates... I guess I can throw it back to the old way for iOS 8 as a work-around!
 	UIView *snapShot;
-	if( [touchedCell respondsToSelector: @selector(snapshotViewAfterScreenUpdates:)] ) {
+	if( floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 &&
+       [touchedCell respondsToSelector: @selector(snapshotViewAfterScreenUpdates:)] ) {
+        DLog( @"The touched cell responds to selector(snapshotViewAfterScreenUpdates:)" );
 		snapShot = [touchedCell snapshotViewAfterScreenUpdates: YES];
+        DLog( @"Got the snapshot: %@!", snapShot );
 		snapShot.frame = touchedCell.frame;
 		snapShot.alpha = 0.70;
 		snapShot.layer.shadowOpacity = 1.0;
@@ -585,6 +593,7 @@ static void *allowsLongPressToReorderDuringEditingKey = &allowsLongPressToReorde
 		// Looks the same or better without the shadows path
 		//snapShot.layer.shadowPath = [[UIBezierPath bezierPathWithRect:snapShot.layer.bounds] CGPath];
 	} else {
+        DLog( @"The touched cell does not respond to selector(snapshotViewAfterScreenUpdates:)" );
 		// make an image from the pressed tableview cell
 		UIGraphicsBeginImageContextWithOptions( touchedCell.bounds.size, NO, 0 );
 		[touchedCell.layer renderInContext:UIGraphicsGetCurrentContext()];
