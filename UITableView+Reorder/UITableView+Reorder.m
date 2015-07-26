@@ -943,7 +943,7 @@ static void *reorderAutoScrollTimerKey = &reorderAutoScrollTimerKey;
 		NSIndexPath	*indexPathForH0;
 		CGFloat h1;
 		NSIndexPath	*indexPathForH1;
-		NSInteger sectionCount = [self.dataSource numberOfSectionsInTableView: self];
+        NSInteger sectionCount = [self.dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)] ? [self.dataSource numberOfSectionsInTableView: self] : 1;
 		for( NSInteger section = 0; section < sectionCount; ++section ) {
 			NSInteger rowCount = [self.dataSource tableView: self numberOfRowsInSection: section];
 			for( NSInteger row = 0; row < rowCount; ++row ) {
