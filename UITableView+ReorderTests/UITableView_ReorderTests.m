@@ -53,32 +53,32 @@
 	NSIndexPath	*rowB;
 
 	rowA = [NSIndexPath indexPathForRow: 0 inSection: 0];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: nil], @"Row %d,%d cannot be above nil", rowA.section, rowA.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: nil], @"Row %ld,%ld cannot be above nil",(long)rowA.section, (long)rowA.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 0];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should not be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should not be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 1 inSection: 0];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 1];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 1 inSection: 1];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 
 	rowA = [NSIndexPath indexPathForRow: 2 inSection: 3];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: nil], @"Row %d,%d cannot be above nil", rowA.section, rowA.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: nil], @"Row %ld,%ld cannot be above nil", (long)rowA.section, (long)rowA.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 0];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should not be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should not be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 1 inSection: 0];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should not be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should not be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 1];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should not be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should not be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 2 inSection: 3];
-	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should not be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should not be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 3 inSection: 3];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 4];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 3 inSection: 4];
-	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %d,%d should be above %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isAboveRowAtIndexPath: rowB], @"Row %ld,%ld should be above %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 }
 
 - (void) test_NSIndexPathIsBelowRowAtIndexPath {
@@ -86,32 +86,32 @@
 	NSIndexPath	*rowB;
 	
 	rowA = [NSIndexPath indexPathForRow: 1 inSection: 1];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: nil], @"Row %d,%d cannot be below nil", rowA.section, rowA.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: nil], @"Row %ld,%ld cannot be below nil", (long)rowA.section, (long)rowA.row );
 	rowB = [NSIndexPath indexPathForRow: 1 inSection: 1];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should not be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should not be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 1 inSection: 0];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 1];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 0];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	
 	rowA = [NSIndexPath indexPathForRow: 2 inSection: 3];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: nil], @"Row %d,%d cannot be below nil", rowA.section, rowA.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: nil], @"Row %ld,%ld cannot be below nil", (long)rowA.section, (long)rowA.row );
 	rowB = [NSIndexPath indexPathForRow: 2 inSection: 3];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should not be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should not be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 3 inSection: 3];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should not be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should not be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 4];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should not be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should not be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 2 inSection: 4];
-	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should not be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertFalse( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should not be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 3 inSection: 2];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 3];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 	rowB = [NSIndexPath indexPathForRow: 0 inSection: 0];
-	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %d,%d should be below %d,%d", rowA.section, rowA.row, rowB.section, rowB.row );
+	XCTAssertTrue( [rowA isBelowRowAtIndexPath: rowB], @"Row %ld,%ld should be below %ld,%ld", (long)rowA.section, (long)rowA.row, (long)rowB.section, (long)rowB.row );
 }
 //------------------------------------------------------------------------------
 
